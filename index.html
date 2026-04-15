@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>📓 Mon Cahier du Coran Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Amiri:ital@0;1&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- COUVERTURE -->
+  <div id="cover-page">
+    <div class="cover-content">
+      <div class="cover-title">📓 Mon Cahier du Coran</div>
+      <div class="cover-subtitle">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+      <button id="open-btn">Ouvrir le Cahier ✨</button>
+    </div>
+  </div>
+
+  <!-- APP PRINCIPALE -->
+  <div id="app" class="hidden">
+    <div class="spiral"></div>
+
+    <!-- NAVIGATION TABS -->
+    <div id="nav-tabs">
+      <button class="tab-btn active" data-target="reading-view">📖 Lecture</button>
+      <button class="tab-btn" data-target="stats-view">📊 Progrès</button>
+      <button class="tab-btn" data-target="favs-view">⭐ Favoris</button>
+      <button class="tab-btn" data-target="journal-view">📝 Journal</button>
+    </div>
+
+    <!-- VUE 1 : LECTURE (L'app actuelle améliorée) -->
+    <div id="reading-view" class="view-content flex">
+        <div id="sidebar">
+          <div class="sidebar-title">📚 Sourates</div>
+          <input type="text" id="search" placeholder="🔍 Rechercher..." />
+          <ul id="surah-list"></ul>
+        </div>
+
+        <div id="main-page">
+          <div class="page-header">
+            <div class="page-title" id="surah-title">Choisir une Sourate</div>
+            <div class="page-actions">
+              <button class="btn-icon" id="print-btn" title="Imprimer">🖨️</button>
+              <button class="btn-icon" id="toggle-translation" title="Traduction">🌍</button>
+              <button class="btn-icon" id="toggle-memorize" title="Mémorisation">🧠</button>
+              <button class="btn-icon" id="toggle-dark">🌙</button>
+            </div>
+          </div>
+          <div id="verses-container"></div>
+          <div class="page-number" id="page-number"></div>
+        </div>
+    </div>
+
+    <!-- VUE 2 : STATISTIQUES -->
+    <div id="stats-view" class="view-content hidden">
+        <div class="cahier-page">
+            <h2 class="page-title">📊 Ma Progression</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-val" id="total-learned">0</span>
+                    <span class="stat-label">Versets appris</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val" id="percent-complete">0%</span>
+                    <span class="stat-label">Du Coran mémorisé</span>
+                </div>
+            </div>
+            <div id="progress-container">
+                <!-- Les barres de progression par sourate iront ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- VUE 3 : FAVORIS -->
+    <div id="favs-view" class="view-content hidden">
+        <div class="cahier-page">
+            <h2 class="page-title">⭐ Mes Versets Préférés</h2>
+            <div id="favs-container">
+                <p class="empty-msg">Aucun favori pour le moment...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- VUE 4 : JOURNAL MANUSCRIT -->
+<div id="journal-view" class="view-content hidden">
+  <div class="journal-layout">
+
+    <!-- SIDEBAR JOURNAL -->
+    <div class="journal-sidebar">
+      <div class="sidebar-title">📅 Mes Pages</div>
+      <button id="new-page-btn">+ Nouvelle Page</button>
+      <ul id="journal-list"></ul>
+    </div>
+
+    <!-- PAGE DE DESSIN -->
+    <div class="drawing-area">
+
+      <!-- TOOLBAR -->
+      <div class="drawing-toolbar">
+        <div class="tool-group">
+          <span class="tool-label">✏️ Stylet</span>
+          <input type="color" id="pen-color" value="#1a1a2e" title="Couleur" />
+          <input type="range" id="pen-size" min="1" max="10" value="2" title="Épaisseur" />
+          <span id="pen-size-label">2px</span>
+        </div>
+        <div class="tool-group">
+          <button class="tool-btn active" id="btn-pen">🖊️ Stylo</button>
+          <button class="tool-btn" id="btn-eraser">🧹 Gomme</button>
+          <button class="tool-btn" id="btn-clear">🗑️ Effacer tout</button>
+        </div>
+        <div class="tool-group">
+          <!-- Couleurs rapides -->
+          <button class="color-dot" style="background:#1a1a2e" data-color="#1a1a2e"></button>
+          <button class="color-dot" style="background:#2980b9" data-color="#2980b9"></button>
+          <button class="color-dot" style="background:#e74c3c" data-color="#e74c3c"></button>
+          <button class="color-dot" style="background:#27ae60" data-color="#27ae60"></button>
+          <button class="color-dot" style="background:#8e44ad" data-color="#8e44ad"></button>
+        </div>
+        <div class="tool-group">
+          <span class="journal-date-label" id="journal-date"></span>
+          <button class="tool-btn save-btn" id="save-page-btn">💾 Sauvegarder</button>
+          <button class="tool-btn print-page-btn" id="print-page-btn">🖨️ Imprimer</button>
+        </div>
+      </div>
+
+      <!-- CANVAS -->
+      <div class="canvas-wrapper">
+        <canvas id="drawing-canvas"></canvas>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
